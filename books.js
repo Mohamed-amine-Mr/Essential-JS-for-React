@@ -143,6 +143,7 @@ function getBooks() {
 function getBook(id) {
   return books.find((book) => book.id === id);
 }
+/*
 const books = getBooks();
 const book = getBook(3);
 // Initially, I was using the filter method, which returns an array, but I needed a single book object.
@@ -246,12 +247,30 @@ spanishTranslation; // "El señor de los anillos" if it exists, otherwise "NOT T
 // Optional Chaining: Allows safe access to deeply nested properties
 // It short-circuits and returns undefined if any part of the chain is null or undefined
 console.log(book.reviews);
+*/
 function getTotalReviewCount(book) {
-  const goodreads = book.reviews.goodreads.reviewsCount;
-  // we see err because we dont have librarything in id 3  , lets fix the err using ?
-  // we fix the err , now we see NaN , lets use ?? in this case to display a messga
-  const librarything = book.reviews?.librarything?.reviewsCount ?? 0; // we want to give it 0 value if its not exist
+  const goodreads = book.reviews?.goodreads.reviewsCount;
+  // We use optional chaining (?.) to safely access the 'reviewsCount' property of 'librarything'.
+  // If 'librarything' or 'reviewsCount' does not exist, it returns undefined instead of throwing an error.
+  // We then use the nullish coalescing operator (??) to provide a default value of 0 if 'reviewsCount' is undefined.
+  const librarything = book.reviews?.librarything?.reviewsCount ?? 0; // we want to give it 0 value if it doesn't exist
   //
-  return goodreads + librarything;
+  return goodreads + librarything; // Sum the review counts from goodreads and librarything
 }
-console.log(getTotalReviewCount(book));
+
+// map
+const books = getBooks();
+// We use the map method to create a new array containing only the titles of the books.
+// The callback function is applied to each book object in the 'books' array, extracting the 'title' property.
+const titles = books.map((book) => book.title);
+console.log(titles.length); // Log the number of titles
+
+// We use the map method again to create a new array of objects containing essential data for each book.
+// For each book object, we create a new object with 'title', 'author', and 'reviewsCountTotal' properties.
+// 'reviewsCountTotal' is calculated using the 'getTotalReviewCount' function.
+const essentialData = books.map((book) => ({
+  title: book.title,
+  author: book.author,
+  reviewsCountTotal: getTotalReviewCount(book),
+}));
+essentialData; // The 'essentialData' array now contains simplified book objects with essential information
