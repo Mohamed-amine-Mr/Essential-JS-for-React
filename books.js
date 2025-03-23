@@ -134,7 +134,7 @@ export const data = [
     },
   },
 ];
-// destructring with object
+
 // Exercise 1: Find a book by its ID and destructure its title, author, and genres properties.
 
 function getBooks() {
@@ -152,6 +152,8 @@ const book = getBook(1);
 
 const { title, author, genres } = book;
 
+// End of Exercise 1
+
 // Exercise 2: Destructuring with Arrays - rely on the order instead of the property name
 
 // Destructuring with Arrays: We rely on the order of elements, not on the property names
@@ -161,7 +163,25 @@ const { title, author, genres } = book;
 // const secondaryGenre = genres[1];
 
 // Using array destructuring to access elements by their order
-const [first, second] = genres;
-console.log(second);
+// const [first, second] = genres;
+// console.log(second);
 
-// Exercise 3
+// Exercise 3: REST and SPREAD Operators - use them on arrays and objects
+
+// REST Operator: Always should be at the end
+// It creates an array containing the values that were not previously destructured
+const [first, second, ...otherGenres] = genres;
+console.log(first, second, otherGenres);
+
+// SPREAD Operator: Create a new array with all genres and a new one at the end
+
+// Incorrect way: newGenres will have 'epic fantasy' outside the array
+const newGenres = [genres, "epic fantasy"];
+newGenres; // Array(6) ['fantasy', 'high-fantasy', 'adventure', 'fiction', 'novels', 'literature'], 'epic fantasy'
+
+// Correct way: Use SPREAD to include 'epic fantasy' inside the array
+const newGenre = [...genres, "epic fantasy"];
+newGenre; // Array(7) ['fantasy', 'high-fantasy', 'adventure', 'fiction', 'novels', 'literature', 'epic fantasy']
+
+// End of Exercise 3
+
