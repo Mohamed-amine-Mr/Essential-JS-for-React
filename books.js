@@ -150,7 +150,7 @@ const book = getBook(1);
 // Initially, I was using the filter method, which returns an array, but I needed a single book object.
 // Therefore, I switched to the find method, which returns the first matching element as an object.
 
-const { title, author, genres } = book;
+const { title, author, genres, pages, publicationDate } = book;
 
 // End of Exercise 1
 
@@ -195,6 +195,16 @@ const updateBook = {
   // Overwriting an existing property
   pages: 12,
 };
-console.log(updateBook);
+// console.log(updateBook);
 // The spread operator is used to create a new object with all properties of the book object
 // Then, it adds a new property 'moviePublicationDate' and overwrites the existing 'pages' property
+
+// Template literals: We can write any JavaScript expression inside ${}, not statements
+// Template literals allow for easier string interpolation and multi-line strings
+const summary = `${title}, a ${pages}-page long book, was written by ${author} in ${
+  publicationDate.split("-")[0]
+} `;
+summary;
+// 'summary' will be a string that includes the book's title, number of pages, author, and publication year
+// The publication year is extracted by splitting the publicationDate string and taking the first part (year)
+
