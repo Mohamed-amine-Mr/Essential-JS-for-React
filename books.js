@@ -259,6 +259,7 @@ function getTotalReviewCount(book) {
 }
 
 // map
+
 const books = getBooks();
 // We use the map method to create a new array containing only the titles of the books.
 // The callback function is applied to each book object in the 'books' array, extracting the 'title' property.
@@ -274,3 +275,23 @@ const essentialData = books.map((book) => ({
   reviewsCountTotal: getTotalReviewCount(book),
 }));
 essentialData; // The 'essentialData' array now contains simplified book objects with essential information
+
+// Filter and includes methods
+
+// We use the filter method to create a new array containing only the books with more than 800 pages.
+// The filter method returns a new array with all elements that pass the test implemented by the provided function.
+// In this case, the test is whether the 'pages' property of each book is greater than 800.
+const longBooks = books
+  // We can chain another array method because books.filter((book) => book.pages > 800) returns a new array.
+  // We then use the map method on this new array to extract the 'title' property of each book.
+  .filter((book) => book.pages > 800)
+  .map((book) => book.title);
+longBooks; // The 'longBooks' array now contains the titles of books with more than 800 pages
+
+// We use the filter method again to create a new array containing only the books that belong to the 'adventure' genre.
+// The includes method is used to check if the 'genres' array of each book includes the string "adventure".
+// The includes method returns true or false, which we use as the condition inside the filter method.
+const adventureBooks = books
+  .filter((book) => book.genres.includes("adventure"))
+  .map((book) => book.title);
+adventureBooks; // The 'adventureBooks' array now contains the titles of books that include the 'adventure' genre
