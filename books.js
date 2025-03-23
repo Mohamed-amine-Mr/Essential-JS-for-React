@@ -134,7 +134,7 @@ export const data = [
     },
   },
 ];
-
+// destructring with object
 // Exercise 1: Find a book by its ID and destructure its title, author, and genres properties.
 
 function getBooks() {
@@ -151,6 +151,17 @@ const book = getBook(1);
 // Therefore, I switched to the find method, which returns the first matching element as an object.
 
 const { title, author, genres } = book;
-console.log(genres);
 
-// Exercise 2:
+// Exercise 2: Destructuring with Arrays - rely on the order instead of the property name
+
+// Destructuring with Arrays: We rely on the order of elements, not on the property names
+
+// Hard way of accessing array elements
+// const primaryGenre = genres[0];
+// const secondaryGenre = genres[1];
+
+// Using array destructuring to access elements by their order
+const [first, second] = genres;
+console.log(second);
+
+// Exercise 3
