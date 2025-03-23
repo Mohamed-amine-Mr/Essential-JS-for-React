@@ -145,12 +145,13 @@ const books = getBooks();
 function getBook(id) {
   return books.find((book) => book.id === id);
 }
-const book = getBook(1);
+const book = getBook(2);
 
 // Initially, I was using the filter method, which returns an array, but I needed a single book object.
 // Therefore, I switched to the find method, which returns the first matching element as an object.
 
-const { title, author, genres, pages, publicationDate } = book;
+const { title, author, genres, pages, publicationDate, hasMovieAdaptation } =
+  book;
 
 // End of Exercise 1
 
@@ -201,18 +202,48 @@ const updateBook = {
 
 // Template literals: We can write any JavaScript expression inside ${}, not statements
 // Template literals allow for easier string interpolation and multi-line strings
-const summary = `${title}, a ${pages}-page long book, was written by ${author} in ${
-  publicationDate.split("-")[0]
-} `;
+
+const getYear = (str) => str.split("-")[0];
+const summary = `${title}, a ${pages}-page long book, was written by ${author} in ${getYear(
+  publicationDate
+)} `;
 summary;
 // 'summary' will be a string that includes the book's title, number of pages, author, and publication year
 // The publication year is extracted by splitting the publicationDate string and taking the first part (year)
 
+// Ternary Operator: A shorthand for if/else statements that returns a value based on a condition
 // we can use if statment in this case m thats why ternaries in useful , because if else  return statment but ternaire .. , return expresion
 // Ternaries Instead of if/else Statements
-// Ternary Operator: A shorthand for if/else statements that returns a value based on a condition
 // It is useful for simple conditional expressions
 const pagesRange = updateBook.pages > 1000 ? "over a 1000" : "less than 1000";
 pagesRange; // 'less than 1000'
 // If the 'pages' property of 'updateBook' is greater than 1000, 'pagesRange' will be "over a 1000"
 // Otherwise, 'pagesRange' will be "less than 1000"
+
+// Short-Circuiting And Logical Operators: &&, ||, ??
+
+// The && operator returns the second operand if the first operand is truthy, otherwise it returns the first operand
+console.log(true && "some string"); // "some string"
+console.log(false && "some string"); // false
+console.log(hasMovieAdaptation && "This book has a movie "); // "This book has a movie" if hasMovieAdaptation is true, otherwise false
+
+// The || operator returns the first operand if it is truthy, otherwise it returns the second operand
+console.log(true || "some string"); // true
+console.log(undefined || "some string"); // "some string"
+
+// Using || to provide a default value if the first operand is falsy
+const spanishTranslation = book.translations.spanish || "NOT TRANSLATED ";
+spanishTranslation; // "El señor de los anillos" if it exists, otherwise "NOT TRANSLATED"
+
+// The problem with || is that it treats 0 as falsy, which can lead to incorrect results
+console.log(book.reviews.librarything.reviewsCount); // 0
+const conteWrong = book.reviews.librarything.reviewsCount || "NO DATA";
+conteWrong; // "NO DATA" because 0 is treated as falsy
+
+// The solution is using ?? (nullish coalescing operator)
+// It only returns the second operand if the first is null or undefined
+const countRight = book.reviews.librarything.reviewsCount ?? "NO DATA";
+countRight; // 0 if reviewsCount is 0, otherwise "NO DATA" if reviewsCount is null or undefined
+
+// Optional Chaining: Allows safe access to deeply nested properties
+// It short-circuits and returns undefined if any part of the chain is null or undefined
