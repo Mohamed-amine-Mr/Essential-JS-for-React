@@ -134,3 +134,23 @@ export const data = [
     },
   },
 ];
+
+// Exercise 1: Find a book by its ID and destructure its title, author, and genres properties.
+
+function getBooks() {
+  return data;
+}
+const books = getBooks();
+
+function getBook(id) {
+  return books.find((book) => book.id === id);
+}
+const book = getBook(1);
+
+// Initially, I was using the filter method, which returns an array, but I needed a single book object.
+// Therefore, I switched to the find method, which returns the first matching element as an object.
+
+const { title, author, genres } = book;
+console.log(genres);
+
+// Exercise 2:
