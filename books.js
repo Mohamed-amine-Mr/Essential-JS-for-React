@@ -172,16 +172,29 @@ const { title, author, genres } = book;
 // It creates an array containing the values that were not previously destructured
 const [first, second, ...otherGenres] = genres;
 console.log(first, second, otherGenres);
+// 'first' will be the first element of the genres array
+// 'second' will be the second element of the genres array
+// 'otherGenres' will be an array containing all the remaining elements of the genres array
 
 // SPREAD Operator: Create a new array with all genres and a new one at the end
 
 // Incorrect way: newGenres will have 'epic fantasy' outside the array
 const newGenres = [genres, "epic fantasy"];
 newGenres; // Array(6) ['fantasy', 'high-fantasy', 'adventure', 'fiction', 'novels', 'literature'], 'epic fantasy'
+// This creates an array with the genres array as the first element and 'epic fantasy' as the second element
 
 // Correct way: Use SPREAD to include 'epic fantasy' inside the array
 const newGenre = [...genres, "epic fantasy"];
 newGenre; // Array(7) ['fantasy', 'high-fantasy', 'adventure', 'fiction', 'novels', 'literature', 'epic fantasy']
+// This creates a new array with all elements of the genres array and adds 'epic fantasy' as the last element
 
-// End of Exercise 3
-
+const updateBook = {
+  ...book,
+  // adding a new property
+  moviePublicationDate: "2003-10-25",
+  // Overwriting an existing property
+  pages: 12,
+};
+console.log(updateBook);
+// The spread operator is used to create a new object with all properties of the book object
+// Then, it adds a new property 'moviePublicationDate' and overwrites the existing 'pages' property
