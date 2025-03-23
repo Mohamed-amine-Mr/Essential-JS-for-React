@@ -140,13 +140,11 @@ export const data = [
 function getBooks() {
   return data;
 }
-const books = getBooks();
-
 function getBook(id) {
   return books.find((book) => book.id === id);
 }
-const book = getBook(2);
-
+const books = getBooks();
+const book = getBook(3);
 // Initially, I was using the filter method, which returns an array, but I needed a single book object.
 // Therefore, I switched to the find method, which returns the first matching element as an object.
 
@@ -190,11 +188,11 @@ newGenre; // Array(7) ['fantasy', 'high-fantasy', 'adventure', 'fiction', 'novel
 // This creates a new array with all elements of the genres array and adds 'epic fantasy' as the last element
 
 const updateBook = {
-  ...book,
+  // ...book,
   // adding a new property
-  moviePublicationDate: "2003-10-25",
+  // moviePublicationDate: "2003-10-25",
   // Overwriting an existing property
-  pages: 12,
+  // pages: 12,
 };
 // console.log(updateBook);
 // The spread operator is used to create a new object with all properties of the book object
@@ -236,14 +234,24 @@ const spanishTranslation = book.translations.spanish || "NOT TRANSLATED ";
 spanishTranslation; // "El señor de los anillos" if it exists, otherwise "NOT TRANSLATED"
 
 // The problem with || is that it treats 0 as falsy, which can lead to incorrect results
-console.log(book.reviews.librarything.reviewsCount); // 0
-const conteWrong = book.reviews.librarything.reviewsCount || "NO DATA";
-conteWrong; // "NO DATA" because 0 is treated as falsy
+// console.log(book.reviews.librarything.reviewsCount); // 0
+// const conteWrong = book.reviews.librarything.reviewsCount || "NO DATA";
+// conteWrong; // "NO DATA" because 0 is treated as falsy
 
 // The solution is using ?? (nullish coalescing operator)
 // It only returns the second operand if the first is null or undefined
-const countRight = book.reviews.librarything.reviewsCount ?? "NO DATA";
-countRight; // 0 if reviewsCount is 0, otherwise "NO DATA" if reviewsCount is null or undefined
+// const countRight = book.reviews.librarything.reviewsCount ?? "NO DATA";
+// countRight; // 0 if reviewsCount is 0, otherwise "NO DATA" if reviewsCount is null or undefined
 
 // Optional Chaining: Allows safe access to deeply nested properties
 // It short-circuits and returns undefined if any part of the chain is null or undefined
+console.log(book.reviews);
+function getTotalReviewCount(book) {
+  const goodreads = book.reviews.goodreads.reviewsCount;
+  // we see err because we dont have librarything in id 3  , lets fix the err using ?
+  // we fix the err , now we see NaN , lets use ?? in this case to display a messga
+  const librarything = book.reviews?.librarything?.reviewsCount ?? 0; // we want to give it 0 value if its not exist
+  //
+  return goodreads + librarything;
+}
+console.log(getTotalReviewCount(book));
