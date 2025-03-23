@@ -45,7 +45,7 @@ export const data = [
       "fantasy",
     ],
     hasMovieAdaptation: false,
-    pages: 295,
+    pages: 12,
     translations: {},
     reviews: {
       goodreads: {
@@ -143,7 +143,6 @@ function getBooks() {
 function getBook(id) {
   return books.find((book) => book.id === id);
 }
-/*
 const books = getBooks();
 const book = getBook(3);
 // Initially, I was using the filter method, which returns an array, but I needed a single book object.
@@ -189,11 +188,11 @@ newGenre; // Array(7) ['fantasy', 'high-fantasy', 'adventure', 'fiction', 'novel
 // This creates a new array with all elements of the genres array and adds 'epic fantasy' as the last element
 
 const updateBook = {
-  // ...book,
+  ...book,
   // adding a new property
-  // moviePublicationDate: "2003-10-25",
+  moviePublicationDate: "2003-10-25",
   // Overwriting an existing property
-  // pages: 12,
+  pages: 12,
 };
 // console.log(updateBook);
 // The spread operator is used to create a new object with all properties of the book object
@@ -247,7 +246,7 @@ spanishTranslation; // "El señor de los anillos" if it exists, otherwise "NOT T
 // Optional Chaining: Allows safe access to deeply nested properties
 // It short-circuits and returns undefined if any part of the chain is null or undefined
 console.log(book.reviews);
-*/
+
 function getTotalReviewCount(book) {
   const goodreads = book.reviews?.goodreads.reviewsCount;
   // We use optional chaining (?.) to safely access the 'reviewsCount' property of 'librarything'.
@@ -260,7 +259,7 @@ function getTotalReviewCount(book) {
 
 // map
 
-const books = getBooks();
+// const books = getBooks();
 // We use the map method to create a new array containing only the titles of the books.
 // The callback function is applied to each book object in the 'books' array, extracting the 'title' property.
 const titles = books.map((book) => book.title);
@@ -295,3 +294,26 @@ const adventureBooks = books
   .filter((book) => book.genres.includes("adventure"))
   .map((book) => book.title);
 adventureBooks; // The 'adventureBooks' array now contains the titles of books that include the 'adventure' genre
+
+// reduce method: Used to reduce the array to a single value
+// We use the reduce method to calculate the total number of pages of all books.
+// The callback function takes an accumulator (sum) and the current element (book), and returns the updated sum.
+const pagesAllBooks = books.reduce((sum, book) => sum + book.pages, 0);
+pagesAllBooks; // The total number of pages of all books
+
+// sort method: Used to sort the elements of an array in place and returns the sorted array
+// Note: The sort method mutates the original array. To avoid this, we can use the slice method to create a copy of the array before sorting.
+
+// Example array to demonstrate sorting
+const arr = [66, -1, 9, 99];
+
+// Using slice() to create a copy of the array before sorting
+// This way, the original array remains unchanged
+const sorted = arr.slice().sort((a, b) => a - b); // Sort in ascending order
+sorted; // [ -1, 9, 66, 99 ]
+arr; // [ 66, -1, 9, 99 ] - original array remains unchanged
+
+// Sorting books by the number of pages in ascending order
+// We use slice() to create a copy of the books array before sorting
+const sortByPages = books.slice().sort((a, b) => a.pages - b.pages);
+sortByPages; // Array of books sorted by pages in ascending order
