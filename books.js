@@ -208,3 +208,11 @@ summary;
 // 'summary' will be a string that includes the book's title, number of pages, author, and publication year
 // The publication year is extracted by splitting the publicationDate string and taking the first part (year)
 
+// we can use if statment in this case m thats why ternaries in useful , because if else  return statment but ternaire .. , return expresion
+// Ternaries Instead of if/else Statements
+// Ternary Operator: A shorthand for if/else statements that returns a value based on a condition
+// It is useful for simple conditional expressions
+const pagesRange = updateBook.pages > 1000 ? "over a 1000" : "less than 1000";
+pagesRange; // 'less than 1000'
+// If the 'pages' property of 'updateBook' is greater than 1000, 'pagesRange' will be "over a 1000"
+// Otherwise, 'pagesRange' will be "less than 1000"
