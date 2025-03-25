@@ -200,25 +200,64 @@ const [first, second, ...rest] = genres;
 const newGenres = [...genres, "epic fantasy"];
 const badGenres = [genres, "epic fantasy"]; // Incorrect nesting
 
-// SPREAD operator for objects
-const updatedBook = {
+// Object spreading for updates
+const updateBook = {
   ...book,
   moviePublicationDate: "2003-10-25",
-  pages: 12
+  pages: 12,
 };
+/* PRACTICE:
+1. Create a new book object with updated author
+2. Add two new genres while keeping existing ones
+*/
 
-// ======================
-// 4. TEMPLATE LITERALS
-// ======================
+/* ============================================
+            EXERCISE 4: TEMPLATE LITERALS
+   Modern string formatting with embedded expressions
+============================================ */
+
 
 const getYear = (str) => str.split("-")[0];
 const summary = `${title}, a ${pages}-page long book, was written by ${author} in ${getYear(publicationDate)}`;
 
-// ======================
-// 5. TERNARY OPERATOR
-// ======================
+/* PRACTICE:
+1. Create a string showing all genres separated by commas
+2. Make a summary that changes based on hasMovieAdaptation
+*/
+
+/* ============================================
+            EXERCISE 5: TERNARY OPERATOR
+   Compact conditional expressions
+============================================ */
+
 
 const pagesRange = updatedBook.pages > 1000 ? "over a 1000" : "less than 1000";
+
+/* PRACTICE:
+1. Create a ternary that checks hasMovieAdaptation
+2. Nest two ternaries to check pages and reviews
+*/
+
+/* ============================================
+            EXERCISE 6: LOGICAL OPERATORS
+   Advanced truthy/falsy patterns
+============================================ */
+
+
+// AND (&&) - returns first falsy or last truthy
+console.log(hasMovieAdaptation && "This book has a movie");
+
+// OR (||) - returns first truthy or last operand
+const spanishTranslation = book.translations.spanish || "NOT TRANSLATED";
+
+// Nullish coalescing (??) - only for null/undefined
+const reviewsCount = book.reviews.librarything?.reviewsCount ?? 0;
+
+/* PRACTICE:
+1. Use || to provide a default rating
+2. Use ?? to handle possible missing reviews
+*/
+
 
 // ======================
 // 6. SHORT-CIRCUITING OPERATORS
