@@ -258,7 +258,6 @@ const reviewsCount = book.reviews.librarything?.reviewsCount ?? 0;
 2. Use ?? to handle possible missing reviews
 */
 
-
 // ======================
 // 6. SHORT-CIRCUITING OPERATORS
 // ======================
@@ -293,17 +292,24 @@ function getTotalReviewCount(book) {
 2. Provide defaults for missing review data
 */
 
+/* ============================================
+            EXERCISE 8: ARRAY METHODS
+   Essential data transformations
+============================================ */
 
-// ======================
-// 8. ARRAY MAP METHOD
-// ======================
-
+// MAP - transform each element
 const titles = books.map((book) => book.title);
+
 const essentialData = books.map((book) => ({
   title: book.title,
   author: book.author,
   reviewsCountTotal: getTotalReviewCount(book),
 }));
+/* PRACTICE:
+1. Map books to just title and author
+2. Filter books with movie adaptations
+3. Calculate average page count
+*/
 
 // ======================
 // 9. ARRAY FILTER METHOD
@@ -334,9 +340,11 @@ const sorted = arr.slice().sort((a, b) => a - b);
 // Sorting books by pages
 const sortByPages = books.slice().sort((a, b) => a.pages - b.pages);
 
-// ======================
-// WORKING WITH IMMUTABLE ARRAYS
-// ======================
+/* ============================================
+            EXERCISE 9: IMMUTABLE ARRAYS
+   Update arrays without mutation
+============================================ */
+
 
 // 1. ADDING A NEW BOOK TO THE ARRAY (IMMUTABLY)
 // ---------------------------------------------
