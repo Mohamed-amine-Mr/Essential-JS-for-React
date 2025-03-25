@@ -182,15 +182,23 @@ const { title, author, genres, pages, publicationDate, hasMovieAdaptation } = bo
 const [firstGenre, secondGenre, ...otherGenres] = genres;
 console.log(firstGenre, secondGenre, otherGenres);
 
-// ======================
-// 3. REST/SPREAD OPERATORS
-// ======================
+/* PRACTICE:
+1. Extract the first genre and collect the rest
+2. Skip the first genre and get the next two
+*/
 
-// REST operator (gather remaining elements)
+/* ============================================
+            EXERCISE 3: REST/SPREAD
+   Modern ways to work with arrays and objects
+============================================ */
+
+
+// REST operator collects remaining elements
 const [first, second, ...rest] = genres;
 
-// SPREAD operator for arrays
+// SPREAD operator examples:
 const newGenres = [...genres, "epic fantasy"];
+const badGenres = [genres, "epic fantasy"]; // Incorrect nesting
 
 // SPREAD operator for objects
 const updatedBook = {
