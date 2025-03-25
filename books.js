@@ -116,18 +116,45 @@ const sorted = arr.slice().sort((a, b) => a - b);
 const sortByPages = books.slice().sort((a, b) => a.pages - b.pages);
 
 // ======================
-// 12. IMMUTABLE ARRAYS
+// WORKING WITH IMMUTABLE ARRAYS
 // ======================
 
-// All array operations above use immutable patterns
-// by creating new arrays rather than modifying existing ones
+// 1. ADDING A NEW BOOK TO THE ARRAY (IMMUTABLY)
+// ---------------------------------------------
+// To add to an array immutably, we use the spread operator to create a new array
+// containing all existing books plus our new book at the end
+const newBook = {
+  id: 6,
+  title: "Harry Potter",
+  author: "J. K. Rowling", // Fixed typo in author name
+};
+const booksAfterAdd = [...data, newBook]; // Creates new array with added book
+booksAfterAdd; // Original array remains unchanged
 
-// ======================
-// 13. PROMISES (EXAMPLE)
-// ======================
+// 2. DELETING A BOOK FROM THE ARRAY (IMMUTABLY)
+// ---------------------------------------------
+// To delete immutably, we filter out the book we want to remove
+// filter() returns a new array with all elements that pass the test (where id is not 6)
+const booksAfterDelete = booksAfterAdd.filter((book) => book.id !== 6);
+booksAfterDelete; // Returns array without the book we just added
 
+// 3. UPDATING A BOOK IN THE ARRAY (IMMUTABLY)
+// -------------------------------------------
+// To update immutably, we map over the array and return:
+// - A new object with updates for the matching book (id === 1)
+// - The original book for all others
+// This maintains the same array length while updating specific elements
+const booksAfterUpdate = booksAfterDelete.map(
+  (book) => (book.id === 1 ? { ...book, title: "hi" } : book) // Only updates book with id 1
+);
 
-// ======================
-// 14. ASYNC/AWAIT (EXAMPLE)
-// ======================
+booksAfterUpdate; // Returns array with updated book title
+
+// KEY IMMUTABILITY PRINCIPLES DEMONSTRATED:
+// 1. Never modify original array directly - always return new arrays
+// 2. Use spread operator (...) for adding elements
+// 3. Use filter() for removing elements
+// 4. Use map() for updating elements
+// 5. When updating objects in array, use spread to copy existing properties
+
 
