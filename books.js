@@ -1,11 +1,9 @@
 /* ============================================
                  BOOK DATA SET
-   Comprehensive collection of book objects with:
-   - Basic info (title, author, pages)
-   - Publication details
-   - Genre classifications
-   - Translation availability
-   - Review scores from multiple sources
+   A rich collection of book objects demonstrating:
+   - Complex nested data structures
+   - Real-world data modeling
+   - Multiple data types (strings, numbers, booleans, arrays, objects)
 ============================================ */
 export const data = [
   {
@@ -145,104 +143,96 @@ export const data = [
 ];
 
 /* ============================================
-            EXERCISE 1: DESTRUCTURING
-   Learn to extract specific properties from objects
+            EXERCISE 1: OBJECT DESTRUCTURING
+   Key Concepts:
+   - Extracting multiple properties from objects
+   - Clean syntax for property access
+   - Practical data extraction patterns
 ============================================ */
 
-// Helper functions to access book data
-
+// Data access helper functions
 function getBooks() {
   return data;
 }
 
-// PRO TIP: find() vs filter()
-// - find() returns first match (single object)
-// - filter() returns all matches (array)
+// Critical Note: 
+// find() returns the first matching object (or undefined)
+// filter() returns an array of matches (empty if none)
 function getBook(id) {
   return books.find((book) => book.id === id);
 }
+
 const books = getBooks();
-const book = getBook(3);
+const book = getBook(3); // Gets "Dune" book object
 
-// Object destructuring pattern:
-// Extract multiple properties in one line
+// Destructuring in action:
+// Extract specific properties into variables
 const { title, author, genres, pages, publicationDate, hasMovieAdaptation } = book;
-
-/* PRACTICE: Try destructuring these:
-1. Extract just 'translations' and 'reviews'
-2. Rename 'title' to 'bookTitle' during destructuring
-*/
 
 /* ============================================
             EXERCISE 2: ARRAY DESTRUCTURING
-   Access array elements by position, not name
+   Key Concepts:
+   - Position-based extraction
+   - Rest pattern for remaining elements
+   - Skipping elements
 ============================================ */
 
-// Array destructuring (position-based)
+// Basic array destructuring
 const [firstGenre, secondGenre, ...otherGenres] = genres;
-console.log(firstGenre, secondGenre, otherGenres);
-
-/* PRACTICE:
-1. Extract the first genre and collect the rest
-2. Skip the first genre and get the next two
-*/
 
 /* ============================================
-            EXERCISE 3: REST/SPREAD
-   Modern ways to work with arrays and objects
+            EXERCISE 3: REST/SPREAD OPERATORS
+   Key Concepts:
+   - Gathering remaining elements (rest)
+   - Creating new arrays/objects (spread)
+   - Immutable data patterns
 ============================================ */
 
-
-// REST operator collects remaining elements
+// Rest operator collects remaining genres
 const [first, second, ...rest] = genres;
 
-// SPREAD operator examples:
-const newGenres = [...genres, "epic fantasy"];
+// Spread operator examples:
+const newGenres = [...genres, "epic fantasy"]; // Correct way
 const badGenres = [genres, "epic fantasy"]; // Incorrect nesting
 
-// Object spreading for updates
+// Object spread for updates
 const updateBook = {
   ...book,
   moviePublicationDate: "2003-10-25",
   pages: 12,
 };
-/* PRACTICE:
-1. Create a new book object with updated author
-2. Add two new genres while keeping existing ones
-*/
 
 /* ============================================
             EXERCISE 4: TEMPLATE LITERALS
-   Modern string formatting with embedded expressions
+   Key Concepts:
+   - Embedded expressions
+   - Multi-line strings
+   - Clean string composition
 ============================================ */
 
-
+// Date parsing helper
 const getYear = (str) => str.split("-")[0];
-const summary = `${title}, a ${pages}-page long book, was written by ${author} in ${getYear(publicationDate)}`;
 
-/* PRACTICE:
-1. Create a string showing all genres separated by commas
-2. Make a summary that changes based on hasMovieAdaptation
-*/
+// Template literal with embedded expressions
+const summary = `${title}, a ${pages}-page long book, was written by ${author} in ${getYear(publicationDate)}`;
 
 /* ============================================
             EXERCISE 5: TERNARY OPERATOR
-   Compact conditional expressions
+   Key Concepts:
+   - Compact conditional expressions
+   - Returns values (unlike if/else)
+   - Simple true/false logic
 ============================================ */
 
-
-const pagesRange = updatedBook.pages > 1000 ? "over a 1000" : "less than 1000";
-
-/* PRACTICE:
-1. Create a ternary that checks hasMovieAdaptation
-2. Nest two ternaries to check pages and reviews
-*/
+const pagesRange = updateBook.pages > 1000 ? "over a 1000" : "less than 1000";
 
 /* ============================================
             EXERCISE 6: LOGICAL OPERATORS
-   Advanced truthy/falsy patterns
+   Key Concepts:
+   - Short-circuit evaluation
+   - Default values with || and ??
+   - Conditional execution
 ============================================ */
-
 
 // AND (&&) - returns first falsy or last truthy
 console.log(hasMovieAdaptation && "This book has a movie");
@@ -253,32 +243,12 @@ const spanishTranslation = book.translations.spanish || "NOT TRANSLATED";
 // Nullish coalescing (??) - only for null/undefined
 const reviewsCount = book.reviews.librarything?.reviewsCount ?? 0;
 
-/* PRACTICE:
-1. Use || to provide a default rating
-2. Use ?? to handle possible missing reviews
-*/
-
-// ======================
-// 6. SHORT-CIRCUITING OPERATORS
-// ======================
-
-// AND (&&) operator
-console.log(hasMovieAdaptation && "This book has a movie");
-
-// OR (||) operator
-const spanishTranslation = book.translations.spanish || "NOT TRANSLATED";
-
-// Nullish coalescing (??) operator
-const reviewsCount = book.reviews.librarything?.reviewsCount ?? 0;
-
-/* PRACTICE:
-1. Use || to provide a default rating
-2. Use ?? to handle possible missing reviews
-*/
-
 /* ============================================
             EXERCISE 7: OPTIONAL CHAINING
-   Safe navigation through nested objects
+   Key Concepts:
+   - Safe property access
+   - Avoiding TypeError on undefined
+   - Clean nested object access
 ============================================ */
 
 function getTotalReviewCount(book) {
@@ -287,167 +257,81 @@ function getTotalReviewCount(book) {
   return goodreads + librarything;
 }
 
-/* PRACTICE:
-1. Safely access a nested translation that might not exist
-2. Provide defaults for missing review data
-*/
-
 /* ============================================
             EXERCISE 8: ARRAY METHODS
-   Essential data transformations
+   Key Concepts:
+   - Transforming data (map)
+   - Filtering collections (filter)
+   - Aggregating values (reduce)
+   - Sorting with immutability (slice + sort)
 ============================================ */
 
-// MAP - transform each element
+// Map - transform array elements
 const titles = books.map((book) => book.title);
 
-const essentialData = books.map((book) => ({
-  title: book.title,
-  author: book.author,
-  reviewsCountTotal: getTotalReviewCount(book),
-}));
-/* PRACTICE:
-1. Map books to just title and author
-2. Filter books with movie adaptations
-3. Calculate average page count
-*/
-
-// ======================
-// 9. ARRAY FILTER METHOD
-// ======================
-
+// Filter + Map chaining
 const longBooks = books
   .filter((book) => book.pages > 800)
   .map((book) => book.title);
 
-const adventureBooks = books
-  .filter((book) => book.genres.includes("adventure"))
-  .map((book) => book.title);
-
-// ======================
-// 10. ARRAY REDUCE METHOD
-// ======================
-
+// Reduce - calculate total pages
 const pagesAllBooks = books.reduce((sum, book) => sum + book.pages, 0);
 
-// ======================
-// 11. ARRAY SORT METHOD
-// ======================
-
-// Sorting numbers
-const arr = [66, -1, 9, 99];
-const sorted = arr.slice().sort((a, b) => a - b);
-
-// Sorting books by pages
+// Sort - immutable approach
 const sortByPages = books.slice().sort((a, b) => a.pages - b.pages);
 
 /* ============================================
             EXERCISE 9: IMMUTABLE ARRAYS
-   Update arrays without mutation
+   Key Concepts:
+   - Adding elements (spread)
+   - Removing elements (filter)
+   - Updating elements (map)
+   - Preserving original array
 ============================================ */
 
-
-// 1. ADDING A NEW BOOK TO THE ARRAY (IMMUTABLY)
-// ---------------------------------------------
-// To add to an array immutably, we use the spread operator to create a new array
-// containing all existing books plus our new book at the end
+// Adding - spread operator
 const newBook = {
   id: 6,
   title: "Harry Potter",
-  author: "J. K. Rowling", // Fixed typo in author name
+  author: "J. K. Rowling",
 };
-const booksAfterAdd = [...data, newBook]; // Creates new array with added book
-booksAfterAdd; // Original array remains unchanged
+const booksAfterAdd = [...data, newBook];
 
-// 2. DELETING A BOOK FROM THE ARRAY (IMMUTABLY)
-// ---------------------------------------------
-// To delete immutably, we filter out the book we want to remove
-// filter() returns a new array with all elements that pass the test (where id is not 6)
+// Deleting - filter
 const booksAfterDelete = booksAfterAdd.filter((book) => book.id !== 6);
-booksAfterDelete; // Returns array without the book we just added
 
-// 3. UPDATING A BOOK IN THE ARRAY (IMMUTABLY)
-// -------------------------------------------
-// To update immutably, we map over the array and return:
-// - A new object with updates for the matching book (id === 1)
-// - The original book for all others
-// This maintains the same array length while updating specific elements
+// Updating - map
 const booksAfterUpdate = booksAfterDelete.map(
-  (book) => (book.id === 1 ? { ...book, title: "hi" } : book) // Only updates book with id 1
+  (book) => (book.id === 1 ? { ...book, title: "hi" } : book)
 );
 
-booksAfterUpdate; // Returns array with updated book title
+/* ============================================
+            EXERCISE 10: PROMISES & FETCH
+   Key Concepts:
+   - Asynchronous operations
+   - Promise chaining
+   - Response handling
+============================================ */
 
-// KEY IMMUTABILITY PRINCIPLES DEMONSTRATED:
-// 1. Never modify original array directly - always return new arrays
-// 2. Use spread operator (...) for adding elements
-// 3. Use filter() for removing elements
-// 4. Use map() for updating elements
-// 5. When updating objects in array, use spread to copy existing properties
+fetch("https://jsonplaceholder.typicode.com/todos")
+  .then((res) => res.json())
+  .then((data) => console.log(data));
 
+console.log("HEllo world"); // Executes immediately
 
-// ======================
-// PROMISES & FETCH API
-// ======================
+/* ============================================
+            EXERCISE 11: ASYNC/AWAIT
+   Key Concepts:
+   - Sequential async code
+   - Error handling
+   - Promise resolution
+============================================ */
 
-// The fetch() function makes an HTTP request to the URL
-// This operation takes time because:
-// 1. The request needs to reach the server
-// 2. The server needs to process it
-// 3. The response data needs to download
-fetch("https://jsonplaceholder.typicode.com/todos").then((res) =>
-  res
-    // First .then() receives the response when the HTTP request completes
-    // The response body contains JSON data that needs to be converted
-    .json()
-
-    // json() also returns a Promise because:
-    // - Parsing JSON takes time (asynchronous)
-    // - The data might be large and take time to process
-    // So we need another .then() to get the final JavaScript data
-
-    // This second .then() receives the parsed JavaScript object
-    .then((data) => console.log(data))
-);
-
-// This console.log executes immediately because:
-// - fetch() works asynchronously in the background
-// - JavaScript doesn't wait for fetch to finish
-// - The rest of your code continues running
-console.log("HEllo world");
-
-
-// ======================
-//Asynchronous JavaScript: Async/Await
-// ======================
-
-/* 
-Using async/await is cleaner than .then() chains
-Important: Async functions always return a Promise, not the direct value
-*/
 async function getTodos() {
-  // await pauses execution here until the fetch completes
-  // Unlike regular synchronous code that would move to next line immediately
   const res = await fetch("https://jsonplaceholder.typicode.com/todos");
-  
-  // await again pauses until the JSON parsing completes
   const data = await res.json();
-  
-  return data; // Returns the data INSIDE the Promise
+  return data;
 }
 
-const todos = getTodos(); 
-// This logs a Promise because:
-// 1. Async functions always wrap returns in Promises
-// 2. We didn't await the function call here
-console.log(todos); // Shows Promise {...}
-
-/*
-In React, we typically don't need to extract the value like this:
-- We'd usually update state directly inside the async function
-- We rarely return data from async functions in components
-- State updates trigger re-renders automatically
-*/
-
-
-
-
+const todos = getTodos();
+console.log(todos); // Promise object
