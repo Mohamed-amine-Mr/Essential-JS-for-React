@@ -272,15 +272,27 @@ const spanishTranslation = book.translations.spanish || "NOT TRANSLATED";
 // Nullish coalescing (??) operator
 const reviewsCount = book.reviews.librarything?.reviewsCount ?? 0;
 
-// ======================
-// 7. OPTIONAL CHAINING
-// ======================
+/* PRACTICE:
+1. Use || to provide a default rating
+2. Use ?? to handle possible missing reviews
+*/
+
+/* ============================================
+            EXERCISE 7: OPTIONAL CHAINING
+   Safe navigation through nested objects
+============================================ */
 
 function getTotalReviewCount(book) {
   const goodreads = book.reviews?.goodreads.reviewsCount;
   const librarything = book.reviews?.librarything?.reviewsCount ?? 0;
   return goodreads + librarything;
 }
+
+/* PRACTICE:
+1. Safely access a nested translation that might not exist
+2. Provide defaults for missing review data
+*/
+
 
 // ======================
 // 8. ARRAY MAP METHOD
