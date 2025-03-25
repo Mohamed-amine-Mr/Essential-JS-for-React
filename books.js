@@ -158,3 +158,36 @@ booksAfterUpdate; // Returns array with updated book title
 // 5. When updating objects in array, use spread to copy existing properties
 
 
+// ======================
+// PROMISES & FETCH API
+// ======================
+
+// The fetch() function makes an HTTP request to the URL
+// This operation takes time because:
+// 1. The request needs to reach the server
+// 2. The server needs to process it
+// 3. The response data needs to download
+fetch("https://jsonplaceholder.typicode.com/todos").then((res) =>
+  res
+    // First .then() receives the response when the HTTP request completes
+    // The response body contains JSON data that needs to be converted
+    .json()
+
+    // json() also returns a Promise because:
+    // - Parsing JSON takes time (asynchronous)
+    // - The data might be large and take time to process
+    // So we need another .then() to get the final JavaScript data
+
+    // This second .then() receives the parsed JavaScript object
+    .then((data) => console.log(data))
+);
+
+// This console.log executes immediately because:
+// - fetch() works asynchronously in the background
+// - JavaScript doesn't wait for fetch to finish
+// - The rest of your code continues running
+console.log("HEllo world");
+
+
+
+
