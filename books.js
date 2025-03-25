@@ -189,5 +189,38 @@ fetch("https://jsonplaceholder.typicode.com/todos").then((res) =>
 console.log("HEllo world");
 
 
+// ======================
+//Asynchronous JavaScript: Async/Await
+// ======================
+
+/* 
+Using async/await is cleaner than .then() chains
+Important: Async functions always return a Promise, not the direct value
+*/
+async function getTodos() {
+  // await pauses execution here until the fetch completes
+  // Unlike regular synchronous code that would move to next line immediately
+  const res = await fetch("https://jsonplaceholder.typicode.com/todos");
+  
+  // await again pauses until the JSON parsing completes
+  const data = await res.json();
+  
+  return data; // Returns the data INSIDE the Promise
+}
+
+const todos = getTodos(); 
+// This logs a Promise because:
+// 1. Async functions always wrap returns in Promises
+// 2. We didn't await the function call here
+console.log(todos); // Shows Promise {...}
+
+/*
+In React, we typically don't need to extract the value like this:
+- We'd usually update state directly inside the async function
+- We rarely return data from async functions in components
+- State updates trigger re-renders automatically
+*/
+
+
 
 
