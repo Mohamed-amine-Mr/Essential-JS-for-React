@@ -1,5 +1,6 @@
 
 ## JavaScript Fundamentals for React Developers
+
 📚 Overview
 This repository demonstrates essential JavaScript concepts that form the foundation of modern React development. Through practical examples using book data, you'll learn key patterns and techniques used daily in React applications.
 
